@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.touch-button {
+  @apply min-h-14 min-w-14 px-6 py-3 rounded-xl text-lg font-semibold
+         active:scale-95 active:opacity-80 transition-all duration-75
+         touch-manipulation select-none cursor-pointer;
+}
+
+.touch-input {
+  @apply w-full px-4 py-3 text-lg border-2 border-gray-300 rounded-xl
+         focus:border-blue-500 focus:outline-none touch-manipulation;
+}
+
+.touch-numpad-key {
+  @apply touch-button bg-gray-200 text-gray-900 hover:bg-gray-300;
+}
+
+body {
+  @apply bg-gray-50;
+}

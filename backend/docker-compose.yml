@@ -1,0 +1,33 @@
+# docker run --name balkon-db -e POSTGRESQL_USERNAME=docker -e POSTGRESQL_PASSWORD=docker -e POSTGRESQL_DATABASE=balkon -p 9000:5432 bitnami/postgresql
+# version: '3.9'
+
+services:
+  database:
+    image: postgres:16.2
+    container_name: balkon_db
+    volumes:
+      - .pgdata:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    networks:
+      - balkon_network
+
+  pg_admin:
+    image: dpage/pgadmin4:8.3
+    container_name: balkon_pgadmin
+    volumes:
+      - .pgadmin:/var/lib/pgadmin
+    ports:
+      - 9001:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    networks:
+      - balkon_network
+
+networks:
+  balkon_network:
